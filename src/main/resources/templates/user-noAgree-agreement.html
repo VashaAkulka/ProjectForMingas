@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Соглашайтесь</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .agreement {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .agreement h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .agreement button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .agreement button:hover {
+            background-color: #45a049;
+        }
+        form {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="datetime-local"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[name="agree"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button[name="agree"]:last-child {
+            margin-right: 0;
+        }
+        button[name="agree"]:hover {
+            background-color: #45a049;
+        }
+        .exit-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .exit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+<body>
+<a href="/" class="exit-button">Выйти в меню</a>
+
+<div class="container">
+    <div class="agreement" th:each="agreement : ${agreements}">
+        <h2 th:text="${agreement.getTitle()}"></h2>
+        <p><strong>Цель:</strong> <span th:text="${agreement.getTarget()}"></span></p>
+        <p th:text="${agreement.getContent()}"></p>
+        <form th:method="post" th:action="@{/consent/{userId}/{agreementId}(userId = ${userId}, agreementId = ${agreement.getId()})}">
+            <label for="toDate">До:
+            <input type="date" name="toDate" id="toDate"></label> <br>
+
+            <button name="agree" value="true" type="submit">Согласиться</button>
+            <button name="agree" value="false" type="submit">Отказаться</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

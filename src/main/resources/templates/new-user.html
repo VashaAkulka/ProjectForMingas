@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пользователь</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .exit-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .exit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<a href="/" class="exit-button">Выйти в меню</a>
+
+<div class="container">
+    <form method="post" action="/user">
+        <label for="name">Имя</label>
+        <input type="text" name="name" id="name">
+
+        <label for="lastName">Фамилия</label>
+        <input type="text" name="lastName" id="lastName">
+
+        <label for="middleName">Отчество</label>
+        <input type="text" name="middleName" id="middleName">
+
+        <label for="phoneNumber">Номер телефона</label>
+        <input type="text" name="phoneNumber" id="phoneNumber">
+
+        <label for="position">Должность</label>
+        <input type="text" name="position" id="position">
+
+        <button type="submit">Создать</button>
+    </form>
+</div>
+</body>
+</html>

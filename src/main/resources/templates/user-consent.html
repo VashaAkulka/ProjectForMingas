@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Уже согласились</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .consent {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .consent p {
+            margin-bottom: 10px;
+        }
+        .consent button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .consent button:hover {
+            background-color: #45a049;
+        }
+
+        .consent h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .exit-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .exit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<a href="/" class="exit-button">Выйти в меню</a>
+
+<div class="container">
+    <div class="consent" th:each="consent : ${consents}">
+        <h2 th:text="${consent.getAgreement().getTitle()}"></h2>
+        <p><strong>Цель:</strong> <span th:text="${consent.getAgreement().getTarget()}"></span></p>
+        <p th:text="${consent.getAgreement().getContent()}"></p>
+
+        <br>
+        <p>От: <span th:text="${consent.getFromData()}"></span></p>
+        <p>До: <span th:text="${consent.getToData()}"></span></p>
+        <p>Статус: <span th:text="${consent.getAgree() ? 'Согласен' : 'Не согласен'}"></span></p>
+        <form th:method="delete" th:action="@{/consent/{userId}/{id}(id = ${consent.getId()}, userId = ${consent.getUser().getId()})}">
+            <button type="submit">Удалить</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
